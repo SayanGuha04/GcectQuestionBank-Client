@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import HText from "@/shared/HText";
 import Campus from "@/assets/collegeCampus.jpg";
 import Exam from "@/assets/writingPaper.jpg";
@@ -27,33 +27,66 @@ const slides = [
 
 const Slides: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [animation, setAnimation] = useState<
+    "slideInRight" | "slideInLeft" | "slideOutRight" | "slideOutLeft" | "none"
+  >("none");
+  const [isHovering, setIsHovering] = useState(false);
 
   const handlePrevSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? slides.length - 1 : prevSlide - 1
-    );
+    setAnimation("slideOutRight");
+    setTimeout(() => {
+      setCurrentSlide((prevSlide) =>
+        prevSlide === 0 ? slides.length - 1 : prevSlide - 1
+      );
+      setAnimation("slideInLeft");
+    }, 500); // Duration of the slide-out transition
   };
 
   const handleNextSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === slides.length - 1 ? 0 : prevSlide + 1
-    );
+    setAnimation("slideOutLeft");
+    setTimeout(() => {
+      setCurrentSlide((prevSlide) =>
+        prevSlide === slides.length - 1 ? 0 : prevSlide + 1
+      );
+      setAnimation("slideInRight");
+    }, 500); // Duration of the slide-out transition
   };
+
+  // Handle auto-slide functionality
+  const startAutoSlide = useCallback(() => {
+    const interval = setInterval(() => {
+      if (!isHovering) {
+        handleNextSlide();
+      }
+    }, 5000); // 5000 ms = 5 seconds
+
+    return () => clearInterval(interval);
+  }, [isHovering]);
+
+  useEffect(() => {
+    const clearInterval = startAutoSlide();
+
+    return () => {
+      clearInterval();
+    };
+  }, [startAutoSlide]);
 
   return (
     <section className="py-32 ml-5 relative">
       <HText>GCECT Question Bank</HText>
       <div className="flex justify-around">
-        <div className="relative py-6">
-          <img
-            src={slides[currentSlide].imgSrc}
-            alt="Slide Image"
-            height={630}
-            width={900}
-            className="rounded-lg blur-sm brightness-125 to-transparent"
-          />
+        <div className="relative py-6 overflow-hidden">
+          <div
+            className={`relative h-[540px] w-[900px] transition-transform duration-500 ${animation === "slideInLeft" ? "animate-slideInLeft" : animation === "slideInRight" ? "animate-slideInRight" : ""}`}
+          >
+            <img
+              src={slides[currentSlide].imgSrc}
+              alt="Slide Image"
+              className="rounded-lg object-cover h-full w-full blur-sm"
+            />
+          </div>
           <div className="top-0 absolute flex-col justify-around h-full py-9 px-10">
-            <h1 className="text-8xl font-black text-primary-500 ">
+            <h1 className="text-8xl font-black text-primary-500">
               {slides[currentSlide].heading}
             </h1>
             <p className="text-4xl font-light text-primary-500 pt-5 pb-4">
@@ -65,7 +98,11 @@ const Slides: React.FC = () => {
               text="Checkout Questions"
               textSize="20px"
             />
-            <div className="absolute bottom-10 left-4 flex space-x-2 px-8 py-3">
+            <div
+              className="absolute bottom-10 left-4 flex space-x-2 px-8 py-3"
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
               <SwitchButton text="<" onClick={handlePrevSlide} />
               <SwitchButton text=">" onClick={handleNextSlide} />
             </div>

@@ -17,6 +17,30 @@ module.exports = {
         dmsans: ["DM Sans", "sans-serif"],
         montserrat: ["Monserrat", "sans-serif"],
       },
+      keyframes: {
+        slideInRight: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        slideOutRight: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        slideInLeft: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        slideOutLeft: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+      },
+      animation: {
+        slideInRight: 'slideInRight 0.5s ease-in-out',
+        slideOutRight: 'slideOutRight 0.5s ease-in-out',
+        slideInLeft: 'slideInLeft 0.5s ease-in-out',
+        slideOutLeft: 'slideOutLeft 0.5s ease-in-out',
+      },
     },
     screens: {
       xs: "480px",
