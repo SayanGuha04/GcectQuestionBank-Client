@@ -3,7 +3,7 @@ import Navbar from "@/scenes/navbar";
 import HText from "@/shared/HText";
 import LoginBox from "@/shared/LoginBox";
 
-const StudentLogin = () => {
+const CoeLogin = () => {
   return (
     <div>
       <Navbar searchButtonNeeded={false} backToHome={true} />
@@ -13,10 +13,10 @@ const StudentLogin = () => {
 
       <div className="flex justify-center mt-10 mb-40">
         <LoginBox
-          heading="Student Login"
-          IdLabel="Student ID"
+          heading="COE Login"
+          IdLabel="COE ID"
           passwordLabel="Password"
-          enterIdPlaceholder="Enter Roll No."
+          enterIdPlaceholder="Enter ID"
           enterPasswordPlaceholder="Enter password"
           buttonText="Login"
         />
@@ -27,4 +27,4 @@ const StudentLogin = () => {
   );
 };
 
-export default StudentLogin;
+export default CoeLogin;

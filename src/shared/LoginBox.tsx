@@ -1,51 +1,63 @@
 import React from "react";
+import ActionButton from "./ActionButton";
 
 interface LoginProps {
   heading: string;
-  studentIdLabel: string;
+  IdLabel: string;
   passwordLabel: string;
-  enterStudentIdPlaceholder: string;
+  enterIdPlaceholder: string;
   enterPasswordPlaceholder: string;
   buttonText: string;
 }
 
 const LoginBox: React.FC<LoginProps> = ({
   heading,
-  studentIdLabel,
+  IdLabel: studentIdLabel,
   passwordLabel,
-  enterStudentIdPlaceholder,
+  enterIdPlaceholder: enterStudentIdPlaceholder,
   enterPasswordPlaceholder,
   buttonText,
 }) => {
   return (
-    <div className="bg-primary-200 p-4 rounded-md">
-      <h2 className="text-center text-lg font-bold">{heading}</h2>
-      <div className="mt-4">
-        <label htmlFor="studentId" className="block text-sm font-medium">
+    <div className="bg-primary-100 p-6 rounded-lg w-full max-w-sm mx-auto">
+      <h2 className="text-center text-2xl font-bold text-primary-500 mb-6">
+        {heading}
+      </h2>
+      <div className="mb-4">
+        <label
+          htmlFor="studentId"
+          className="block text-sm font-medium text-primary-400"
+        >
           {studentIdLabel}
         </label>
         <input
           type="text"
           id="studentId"
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          className="mt-1 block w-full border border-primary-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring focus:ring-primary-300"
           placeholder={enterStudentIdPlaceholder}
         />
       </div>
-      <div className="mt-4">
-        <label htmlFor="password" className="block text-sm font-medium">
+      <div className="mb-6">
+        <label
+          htmlFor="password"
+          className="block text-sm font-medium text-primary-400"
+        >
           {passwordLabel}
         </label>
         <input
           type="password"
           id="password"
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          className="mt-1 block w-full border border-primary-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring focus:ring-primary-300"
           placeholder={enterPasswordPlaceholder}
         />
       </div>
-      <div className="mt-4">
-        <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          {buttonText}
-        </button>
+      <div className="flex justify-center">
+        <ActionButton
+          height="40px"
+          width="100px"
+          textSize="20px"
+          text={buttonText}
+        />
       </div>
     </div>
   );

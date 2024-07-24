@@ -10,13 +10,13 @@ type Props = {
 };
 
 const Navbar = ({ searchButtonNeeded = true, backToHome = false }: Props) => {
-  const navigate = useNavigate();
   const flexBetween = "flex items-center justify-between";
   const navbarBackground = "bg-primary-500";
   const handleSearch = (query: string) => {
     console.log("Search query:", query);
     //TODO
   };
+  const navigate = useNavigate();
   const handleStudentLogin = () => {
     navigate("/student-login");
   };
@@ -24,8 +24,8 @@ const Navbar = ({ searchButtonNeeded = true, backToHome = false }: Props) => {
     navigate("/");
   };
   const handleFacultyLogin = () => {
-    navigate("/faculty-login")
-  }
+    navigate("/faculty-login");
+  };
 
   return (
     <nav>
