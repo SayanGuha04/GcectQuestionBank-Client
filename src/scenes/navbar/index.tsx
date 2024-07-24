@@ -2,6 +2,7 @@ import Emblem from "@/assets/emblem.png";
 import CollegeLogo from "@/assets/collegelogo.png";
 import ActionButton from "@/shared/ActionButton";
 import SearchBar from "@/shared/SearchBar";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   searchButtonNeeded: boolean;
@@ -9,12 +10,22 @@ type Props = {
 };
 
 const Navbar = ({ searchButtonNeeded = true, backToHome = false }: Props) => {
+  const navigate = useNavigate();
   const flexBetween = "flex items-center justify-between";
   const navbarBackground = "bg-primary-500";
   const handleSearch = (query: string) => {
     console.log("Search query:", query);
     //TODO
   };
+  const handleStudentLogin = () => {
+    navigate("/student-login");
+  };
+  const handleBackToHome = () => {
+    navigate("/");
+  };
+  const handleFacultyLogin = () => {
+    navigate("/faculty-login")
+  }
 
   return (
     <nav>
@@ -50,6 +61,7 @@ const Navbar = ({ searchButtonNeeded = true, backToHome = false }: Props) => {
                 width="145px"
                 text="Back to Home"
                 textSize="16"
+                onClick={handleBackToHome}
               />
             </div>
           )}
@@ -60,12 +72,15 @@ const Navbar = ({ searchButtonNeeded = true, backToHome = false }: Props) => {
                 width="145px"
                 text="Faculty Login"
                 textSize="16"
+                onClick={handleFacultyLogin}
               />
+
               <ActionButton
                 height="40px"
                 width="145px"
                 text="Student Login"
                 textSize="16"
+                onClick={handleStudentLogin}
               />
             </div>
           )}

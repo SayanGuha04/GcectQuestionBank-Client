@@ -92,12 +92,18 @@ const Slides: React.FC = () => {
             <p className="text-4xl font-light text-primary-500 pt-5 pb-4">
               {slides[currentSlide].subheading}
             </p>
-            <ActionButton
-              height="50px"
-              width="220px"
-              text="Checkout Questions"
-              textSize="20px"
-            />
+            <div
+              onMouseEnter={() => setIsHovering(true)}
+              onMouseLeave={() => setIsHovering(false)}
+            >
+              <ActionButton
+                height="50px"
+                width="220px"
+                text="Checkout Questions"
+                textSize="20px"
+              />
+            </div>
+
             <div
               className="absolute bottom-10 left-4 flex space-x-2 px-8 py-3"
               onMouseEnter={() => setIsHovering(true)}
