@@ -1,32 +1,63 @@
-import React from "react";
+import React, { useState } from "react";
 import HText from "@/shared/HText";
 import Campus from "@/assets/collegeCampus.jpg";
+import Exam from "@/assets/writingPaper.jpg";
+import SampleGraph from "@/assets/sampleGraph.png";
 import ActionButton from "@/shared/ActionButton";
 import SwitchButton from "@/shared/SwitchButton";
 
-type Props = {};
+// Define an array of slides
+const slides = [
+  {
+    imgSrc: Campus,
+    heading: "The GCECT\nQuestion Bank\nMakes it easier",
+    subheading: "Get question papers ready on the go",
+  },
+  {
+    imgSrc: Exam,
+    heading: "Test yourself\non a generated\nquestion paper",
+    subheading: "And get a score with helpful insights",
+  },
+  {
+    imgSrc: SampleGraph,
+    heading: "See trends on\nPrevious Year\nQuestion Papers",
+    subheading: "To grasp important questions",
+  },
+];
 
-const Slides: React.FC<Props> = () => {
+const Slides: React.FC = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const handlePrevSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === 0 ? slides.length - 1 : prevSlide - 1
+    );
+  };
+
+  const handleNextSlide = () => {
+    setCurrentSlide((prevSlide) =>
+      prevSlide === slides.length - 1 ? 0 : prevSlide + 1
+    );
+  };
+
   return (
     <section className="py-32 ml-5 relative">
       <HText>GCECT Question Bank</HText>
       <div className="flex justify-around">
         <div className="relative py-6">
           <img
-            src={Campus}
-            alt="Picture of College Campus"
-            height={540}
+            src={slides[currentSlide].imgSrc}
+            alt="Slide Image"
+            height={630}
             width={900}
             className="rounded-lg blur-sm brightness-125 to-transparent"
           />
-          <div className="top-0 absolute flex-col justify-around h-full py-10 px-10">
+          <div className="top-0 absolute flex-col justify-around h-full py-9 px-10">
             <h1 className="text-8xl font-black text-primary-500 ">
-              The GCECT
-              <br /> Question Bank <br />
-              Makes it easier
+              {slides[currentSlide].heading}
             </h1>
-            <p className="text-4xl font-light text-primary-500 pt-5 pb-32">
-              Get question papers ready on the go
+            <p className="text-4xl font-light text-primary-500 pt-5 pb-4">
+              {slides[currentSlide].subheading}
             </p>
             <ActionButton
               height="50px"
@@ -35,8 +66,8 @@ const Slides: React.FC<Props> = () => {
               textSize="20px"
             />
             <div className="absolute bottom-10 left-4 flex space-x-2 px-8 py-3">
-              <SwitchButton text="<" />
-              <SwitchButton text=">" />
+              <SwitchButton text="<" onClick={handlePrevSlide} />
+              <SwitchButton text=">" onClick={handleNextSlide} />
             </div>
           </div>
         </div>
