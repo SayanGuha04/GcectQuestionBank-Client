@@ -8,6 +8,7 @@ interface LoginProps {
   enterIdPlaceholder: string;
   enterPasswordPlaceholder: string;
   buttonText: string;
+  onClick?: () => void;
 }
 
 const LoginBox: React.FC<LoginProps> = ({
@@ -17,6 +18,7 @@ const LoginBox: React.FC<LoginProps> = ({
   enterIdPlaceholder: enterStudentIdPlaceholder,
   enterPasswordPlaceholder,
   buttonText,
+  onClick
 }) => {
   return (
     <div className="bg-primary-100 p-6 rounded-lg w-full max-w-sm mx-auto">
@@ -57,6 +59,7 @@ const LoginBox: React.FC<LoginProps> = ({
           width="100px"
           textSize="20px"
           text={buttonText}
+          onClick={onClick}
         />
       </div>
     </div>

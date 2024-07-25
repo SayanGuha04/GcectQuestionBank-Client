@@ -6,9 +6,7 @@ import COEImage from "@/assets/coeSample.png";
 import ActionButton from "@/shared/ActionButton";
 import { useNavigate } from "react-router-dom";
 
-type Props = {};
-
-const FacultyLogin = (props: Props) => {
+const FacultyLogin = () => {
   const navigate = useNavigate();
   const handleTeacherLogin = () => {
     navigate("/teacher-login");

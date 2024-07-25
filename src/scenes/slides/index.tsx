@@ -85,7 +85,7 @@ const Slides: React.FC = () => {
               className="rounded-lg object-cover h-full w-full blur-sm"
             />
           </div>
-          <div className="top-0 absolute flex-col justify-around h-full py-9 px-10">
+          <div className="top-0 absolute flex-col justify-around h-full pt-10 pb-8 px-10">
             <h1 className="text-8xl font-black text-primary-500">
               {slides[currentSlide].heading}
             </h1>

@@ -2,8 +2,17 @@ import Footer from "@/scenes/footer";
 import Navbar from "@/scenes/navbar";
 import HText from "@/shared/HText";
 import LoginBox from "@/shared/LoginBox";
+import { useNavigate } from "react-router-dom";
 
 const TeacherLogin = () => {
+  const credentialsApproved = true;
+  const navigate = useNavigate();
+  const handleLogin = () => {
+    if (credentialsApproved) {
+      navigate("/add-questions");
+    }
+  };
+
   return (
     <div>
       <Navbar searchButtonNeeded={false} backToHome={true} />
@@ -19,6 +28,7 @@ const TeacherLogin = () => {
           enterIdPlaceholder="Enter ID"
           enterPasswordPlaceholder="Enter password"
           buttonText="Login"
+          onClick={handleLogin}
         />
       </div>
 

@@ -37,7 +37,7 @@ const Navbar = ({ searchButtonNeeded = true, backToHome = false }: Props) => {
           <div className="flex gap-4 items-center">
             <img src={Emblem} alt="Emblem" height={40} width={40} />
             <img src={CollegeLogo} alt="College Logo" height={60} width={60} />
-            <div>
+            <div className="flex-col justify-center text-nowrap">
               <p className="text-primary-100 font-semibold text-lg">
                 Government College of Engineering
                 <br /> & Ceramic Technology
