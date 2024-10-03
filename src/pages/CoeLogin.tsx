@@ -3,7 +3,80 @@ import Navbar from "@/scenes/navbar";
 import HText from "@/shared/HText";
 import LoginBox from "@/shared/LoginBox";
 
-const CoeLogin = () => {
+import React, { useState } from "react";
+
+interface CoeLoginProps {
+  setCoeAuth: (boolean: boolean) => void;
+}
+
+
+const CoeLogin: React.FC<CoeLoginProps> = ({setCoeAuth}) => {
+
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+
+
+  const handleLogin = async() => {
+    
+    if (!name || !password ) {
+      return alert("Please fill in all fields");
+    }
+
+
+    try {
+
+      const body = {name, password};
+
+      const response = await fetch(
+          "http://localhost:5000/auth/login/coe", {
+          method: "POST",
+          headers: { "Content-Type": "application/json"},
+          body: JSON.stringify(body)
+      });
+
+      const parseRes = await response.json();
+
+      if (parseRes.token) {
+        localStorage.setItem("token", parseRes.token);
+        
+        try {
+          const response = await fetch("http://localhost:5000/iscoe", {
+            method: "GET",
+            headers: {token: localStorage.token}
+          });
+
+          const verify = await response.json();
+          setCoeAuth(verify);
+          location.reload();
+
+        } catch (err) {
+          console.log(err);
+          setCoeAuth(false);
+        }
+        
+         // Set authenticated state
+    } else {
+        setCoeAuth(false);
+        alert(`Invalid ID/Password (${parseRes.error} token)`);
+        
+    }
+
+  } catch (err) {
+      console.error(err);
+  }
+
+
+  };
+
   return (
     <div>
       <Navbar searchButtonNeeded={false} backToHome={true} />
@@ -19,6 +92,11 @@ const CoeLogin = () => {
           enterIdPlaceholder="Enter ID"
           enterPasswordPlaceholder="Enter password"
           buttonText="Login"
+          onClick={handleLogin}
+          name={name}
+          password={password}
+          onNameChange={handleNameChange}
+          onPasswordChange={handlePasswordChange}
         />
       </div>
 

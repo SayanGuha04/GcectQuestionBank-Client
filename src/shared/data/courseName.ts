@@ -1,10 +1,14 @@
-const courseNameOptions = [
-    "All CourseNames",
-    "Mathematics - I",
-    "Physics",
-    "Electrical Engineering",
-    // Add the rest of your course names here
-  ];
-  
-  export default courseNameOptions;
-  
+const courseNameOptions = () => {
+  return fetch("http://localhost:5000/getFilters/subjects")
+      .then(response => {
+          if (!response.ok) {
+              throw new Error('Network response was not ok');
+          }
+          return response.json(); // Return the parsed JSON
+      })
+      .then(data => {
+        return ['All Subjects', ...data];
+      });
+};
+
+export default courseNameOptions;

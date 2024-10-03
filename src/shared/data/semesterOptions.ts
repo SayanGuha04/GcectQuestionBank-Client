@@ -1,5 +1,5 @@
 const semesterOptions = [
-    "All semsters",
+    "All Semesters",
     "1",
     "2",
     "3",

@@ -1,5 +1,5 @@
 const courseOptions = [
-    "All courses", "B. Tech", "M. Tech", "Phd"
+    "All courses", "BTech", "MTech", "PhD"
 ];
 
 export default courseOptions;

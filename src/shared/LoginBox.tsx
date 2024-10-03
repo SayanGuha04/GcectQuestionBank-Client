@@ -9,6 +9,10 @@ interface LoginProps {
   enterPasswordPlaceholder: string;
   buttonText: string;
   onClick?: () => void;
+  name: string;
+  password: string;
+  onNameChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const LoginBox: React.FC<LoginProps> = ({
@@ -18,7 +22,11 @@ const LoginBox: React.FC<LoginProps> = ({
   enterIdPlaceholder: enterStudentIdPlaceholder,
   enterPasswordPlaceholder,
   buttonText,
-  onClick
+  onClick,
+  name,
+  password,
+  onNameChange,
+  onPasswordChange
 }) => {
   return (
     <div className="bg-primary-100 p-6 rounded-lg w-full max-w-sm mx-auto">
@@ -37,6 +45,8 @@ const LoginBox: React.FC<LoginProps> = ({
           id="studentId"
           className="mt-1 block w-full border border-primary-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring focus:ring-primary-300"
           placeholder={enterStudentIdPlaceholder}
+          value={name}
+          onChange={onNameChange} // Add this line
         />
       </div>
       <div className="mb-6">
@@ -51,6 +61,8 @@ const LoginBox: React.FC<LoginProps> = ({
           id="password"
           className="mt-1 block w-full border border-primary-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring focus:ring-primary-300"
           placeholder={enterPasswordPlaceholder}
+          value={password}
+          onChange={onPasswordChange} // Add this line
         />
       </div>
       <div className="flex justify-center">
