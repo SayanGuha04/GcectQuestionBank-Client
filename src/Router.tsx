@@ -20,14 +20,11 @@ import AddQuestion from "./shared/AddQuestion";
 const AppRouter: React.FC = () => {
 
 
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [isStudent, setIsStudent] = useState(true);
   const [isTeacher, setIsTeacher] = useState(true);
   const [isCoe, setIsCoe] = useState(true);
 
-  const setAuth = (boolean: boolean) => {
-    setIsAuthenticated(boolean);
-  } 
+  
   const setStudentAuth = (boolean: boolean) => {
     setIsStudent(boolean);
   } 
@@ -38,23 +35,7 @@ const AppRouter: React.FC = () => {
     setIsTeacher(boolean);
   } 
 
-  async function isAuth() {
-    try {
-      
-      const response = await fetch("http://localhost:5000/auth/is-verify", {
-        method: "GET",
-        headers: { token: localStorage.token }
-      });
-
-      const parseRes = await response.json();
-      
-      parseRes === true ? setIsAuthenticated(true):setIsAuthenticated(false);
-      
-
-    } catch (err) {
-      console.error(err);      
-    }
-  }
+  
 
   async function isStudentAuth() {
     try {
@@ -145,14 +126,12 @@ const AppRouter: React.FC = () => {
         <Route path="/edit-teacher-details" element={isCoe ? <EditTeacherDetails /> : <Navigate to="/coe-login" replace />} />
         <Route path="/edit-syllabus" element={isCoe ? <EditSyllabus /> : <Navigate to="/coe-login" replace />} />
 
-        <Route path="/add-subject" element={<AddSubject setAuth={setIsAuthenticated} />} />
-        <Route path="/add-module/:subid" element={<AddModule setAuth={setIsAuthenticated}/> } />
-        <Route path="/add-question/:subid/:moduleid" element={<AddQuestion setAuth={setIsAuthenticated}/> } />
-
-
         
-      
-
+        <Route path="/add-subject" element={(isCoe || isTeacher) ? <AddSubject/> : <Navigate to="/faculty-login" replace />} />
+        <Route path="/add-module/:subid" element={(isCoe || isTeacher) ? <AddModule/> : <Navigate to="/faculty-login" replace /> } />
+        <Route path="/add-question/:subid/:moduleid" element={(isCoe || isTeacher) ? <AddQuestion/> : <Navigate to="/faculty-login" replace /> } />
+        
+       
         
 
 

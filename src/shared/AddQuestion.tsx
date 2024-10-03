@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import EditQuestion from "./EditQuestion";
 interface Question {
     qid: string;  // Now using string instead of number
@@ -17,11 +17,9 @@ interface FormData {
     marks: string;
 }
 
-interface AddQuestionProps {
-    setAuth: (auth: boolean) => void;
-}
 
-const AddQuestion: React.FC<AddQuestionProps> = ({ setAuth }) => {
+
+const AddQuestion = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [questions, setQuestions] = useState<Question[]>([]);
     const [formData, setFormData] = useState<FormData>({ name: '', marks: '' });

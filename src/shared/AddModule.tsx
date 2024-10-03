@@ -6,9 +6,7 @@ interface Module {
     module: string;
 }
 
-interface AddModuleProps {
-    setAuth: (auth: boolean) => void;
-}
+
 
 interface FormData {
     name: string;
@@ -19,7 +17,7 @@ interface FormData {
     ct: boolean;
 }
 
-const AddModule: React.FC<AddModuleProps> = ({ setAuth }) => {
+const AddModule = () => {
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [modules, setModules] = useState<Module[]>([]);
     const [formData, setFormData] = useState<FormData>({

@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import React, { useState, useEffect, ChangeEvent } from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
 interface Subject {
@@ -16,11 +16,9 @@ interface FormData {
   ct: boolean;
 }
 
-interface AddSubjectProps {
-  setAuth: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const AddSubject: React.FC<AddSubjectProps> = ({ setAuth }) => {
+
+const AddSubject = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [subjects, setSubjects] = useState<Subject[]>([]);
   const [formData, setFormData] = useState<FormData>({
@@ -53,7 +51,7 @@ const AddSubject: React.FC<AddSubjectProps> = ({ setAuth }) => {
       sem: formData.semester,
     };
 
-    const response = await fetch("http://localhost:5000/addSubject", {
+    await fetch("http://localhost:5000/addSubject", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
